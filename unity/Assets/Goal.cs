@@ -41,7 +41,7 @@ public class Goal : MonoBehaviour {
 	void OnGUI()
 	{
 		if(clear) {
-			GUI.Box(new Rect(100, 100, 100, 100), "You won!");
+			GUI.Box(new Rect((Screen.width - 133) / 2, (Screen.height - 100) / 2, 133, 100), "You have won!");
 		}
 	}
 }
