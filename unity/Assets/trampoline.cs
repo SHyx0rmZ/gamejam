@@ -31,7 +31,10 @@ public class trampoline : MonoBehaviour {
 	
 	void OnCollisionStay (Collision collision) {
 		if (collision.rigidbody) {
-        	collision.rigidbody.AddForce(Vector3.up * 50.0f * bounciness);
+			if (collision.transform.position.y < this.transform.position.y)
+				collision.rigidbody.AddForce(Vector3.down * 50.0f * bounciness);
+			else
+        		collision.rigidbody.AddForce(Vector3.up * 50.0f * bounciness);
 			
 			if (drop.Jumper == null) {
 				drop.Jumper = collision.gameObject;
