@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class bounce : MonoBehaviour {
-	
 	public float mass = 1.0f;
 	
 	// Use this for initialization
@@ -19,11 +18,6 @@ public class bounce : MonoBehaviour {
 		
 		if (recording == null)
 			throw new MissingComponentException("Timerecording component not found");
-		
-		//PickupDropItem drop = (PickupDropItem)gameObject.AddComponent(typeof(PickupDropItem));
-		
-		//if (drop == null)
-		//	throw new MissingComponentException("PickupDropItem component not found");
 	}
 	
 	// Update is called once per frame

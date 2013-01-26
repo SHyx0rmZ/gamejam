@@ -2,12 +2,22 @@ using UnityEngine;
 using System.Collections;
 
 public class Timerecording : MonoBehaviour {
-	
-	
-	public float[] time =new float[3];
-	float timeTime;
-	public int count=0;
-	bool plus =false;
+	private float[] time = new float[3];
+	private float timeTime;
+	private int count = 0;
+	private bool plus = false;
+
+	public int Count {
+		get {
+			return this.count;
+		}
+	}
+
+	public float[] Time {
+		get {
+			return this.time;
+		}
+	}	
 	// Use this for initialization
 	void Awake () {
 		this.transform.tag = "Figuren";
@@ -15,23 +25,20 @@ public class Timerecording : MonoBehaviour {
 
 	void Update()
 	{
-		if(plus)
-		{
-			plus =false;
-			count+=1;
+		if (plus) {
+			plus = false;
+			count += 1;
 		}
-		if(count >= time.Length)
-		{
-			count =0;
+		
+		if (count >= time.Length) {
+			count = 0;
 		}
 	}
+	
 	void OnCollisionEnter()
 	{
-	 	timeTime =Time.time;
-		
+	 	timeTime = UnityEngine.Time.time;
 		time[count] = timeTime;
-		plus =true;
-		//Debug.Log(time[count]+" "+transform.name + " "+count +" "+ plus);
-		
+		plus = true;
 	}
 }

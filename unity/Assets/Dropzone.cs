@@ -5,8 +5,16 @@ public class Dropzone : MonoBehaviour {
 	private bool down = false;
 	private bool last = false;
 	private PickupRemember remember = null;
-	public GameObject jumper = null;
-	
+	private GameObject jumper = null;
+
+	public GameObject Jumper {
+		get {
+			return this.jumper;
+		}
+		set {
+			jumper = value;
+		}
+	}	
 	// Use this for initialization
 	void Start () {
 		remember = Camera.main.GetComponent<PickupRemember>();
@@ -18,33 +26,28 @@ public class Dropzone : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		RaycastHit hit = new RaycastHit();
-		if (this.collider.Raycast(new Ray(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward), out hit, 1000.0f))
-		{
-		last = down;
-		down = Input.GetMouseButtonDown(0) || Input.GetMouseButton(0);
-		if (!last && down)
-		{
-			if (remember.item == null && jumper != null)
-			{
-				remember.item = jumper;
-				jumper = null;
+		
+		if (this.collider.Raycast(new Ray(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward), out hit, 1000.0f)) {
+			last = down;
+			down = Input.GetMouseButtonDown(0) || Input.GetMouseButton(0);
+
+			if (!last && down) {
+				if (remember.Item == null && jumper != null) {
+					remember.Item = jumper;
+					jumper = null;
+				} else if (remember.Item != null && jumper != null) {
+					GameObject temp = jumper;
+					jumper = remember.Item;
+					remember.Item.transform.position = this.transform.position + new Vector3(0.0f, 6.0f - this.transform.localScale.y / 2.0f, 0.0f);
+					remember.Item.rigidbody.velocity = Vector3.zero;
+					remember.Item = temp;
+				} else if (remember.Item != null && jumper == null) {
+					remember.Item.transform.position = this.transform.position + new Vector3(0.0f, 6.0f - this.transform.localScale.y / 2.0f, 0.0f);
+					remember.Item.rigidbody.velocity = Vector3.zero;
+					remember.Item = null;
+					jumper = remember.Item;
+				}
 			}
-			else if (remember.item != null && jumper != null)
-			{
-				GameObject temp = jumper;
-				jumper = remember.item;
-				remember.item.transform.position = this.transform.position + new Vector3(0.0f, this.transform.localScale.y / 2.0f - 1.0f, 0.0f);
-				remember.item.rigidbody.velocity = Vector3.zero;
-				remember.item = temp;
-			}
-			else if (remember.item != null && jumper == null)
-			{
-				remember.item.transform.position = this.transform.position + new Vector3(0.0f, this.transform.localScale.y / 2.0f - 1.0f, 0.0f);
-				remember.item.rigidbody.velocity = Vector3.zero;
-				remember.item = null;
-				jumper = remember.item;
-			}
-		}
 		}
 	}
 }

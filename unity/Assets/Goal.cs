@@ -2,11 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class Goal : MonoBehaviour {
-	
-	public float abweichung= 3.0f;
-	GameObject[] figuren;
-	float[] zeitwert;
-	bool clear;
+	public float timeInterval = 3.0f;
+	private GameObject[] figuren;
+	private float[] zeitwert;
+	private bool clear;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,27 +16,23 @@ public class Goal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < figuren.Length; ++i)
-		{
+		for (int i = 0; i < figuren.Length; ++i) {
 			zeitwert[i] = 0.0f;
 			
 			for (int j = 0; j < 3; ++j)
-				if (figuren[i].gameObject.GetComponent<Timerecording>().time[2] != 0.0f)
-					zeitwert[i] += figuren[i].gameObject.GetComponent<Timerecording>().time[j];
+				if (figuren[i].gameObject.GetComponent<Timerecording>().Time[2] != 0.0f)
+					zeitwert[i] += figuren[i].gameObject.GetComponent<Timerecording>().Time[j];
 		}
 		
-		if (zeitwert[0] != 0.0f)
-		{
+		if (zeitwert[0] != 0.0f) {
 			int k = 0;
 		
-			while (++k < figuren.Length)
-			{
-				if (zeitwert[0] > zeitwert[k] + abweichung || zeitwert[0] < zeitwert[k] - abweichung)
+			while (++k < figuren.Length) {
+				if (zeitwert[0] > zeitwert[k] + timeInterval || zeitwert[0] < zeitwert[k] - timeInterval)
 					break;
 			}
 		
-			if (k == figuren.Length)
-			{
+			if (k == figuren.Length) {
 				clear = true;
 			}
 		}	
@@ -45,9 +40,8 @@ public class Goal : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		if(clear)
-		{
-			GUI.Box(new Rect(100,100,100,100), "You won!");
+		if(clear) {
+			GUI.Box(new Rect(100, 100, 100, 100), "You won!");
 		}
 	}
 }

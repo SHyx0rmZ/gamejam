@@ -47,8 +47,6 @@
      <Compile Include="Assets\Dropzone.cs" />
      <Compile Include="Assets\GameControl.cs" />
      <Compile Include="Assets\Goal.cs" />
-     <Compile Include="Assets\Move.cs" />
-     <Compile Include="Assets\PickupDropItem.cs" />
      <Compile Include="Assets\PickupRemember.cs" />
      <Compile Include="Assets\Timerecording.cs" />
      <Compile Include="Assets\bounce.cs" />

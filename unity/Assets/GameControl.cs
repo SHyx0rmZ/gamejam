@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class GameControl : MonoBehaviour {
-	public float abweichung = 3.0f;
+	public float timeInterval = 3.0f;
 	private PickupRemember remember = null;
 	
 	// Use this for initialization
@@ -12,14 +12,14 @@ public class GameControl : MonoBehaviour {
 		if (goal == null)
 			throw new MissingComponentException("Goal component not found");
 		
-		goal.abweichung = abweichung;
+		goal.timeInterval = timeInterval;
 		
 		remember = (PickupRemember)gameObject.AddComponent(typeof(PickupRemember));
 		
 		if (remember == null)
 			throw new MissingComponentException("PickupRemember component not found");
 		
-		remember.item = null;
+		remember.Item = null;
 	}
 	
 	// Update is called once per frame
